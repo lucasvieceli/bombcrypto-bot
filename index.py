@@ -505,7 +505,7 @@ def registerBcoin(idMeta):
     last_date = getLastBcoinDate(idMeta)
 
     
-    if last_date < current_date and hour == '18':
+    if last_date < current_date and hour == '01':
 
     	logger('Registering last bcoin')
 
