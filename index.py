@@ -440,8 +440,7 @@ def refreshHeroes():
         else:
             buttonsClicked = clickButtons()
 
-        if buttonsClicked == 0:
-            buttonsClicked = clickFullBarButtons()
+        clickFullBarButtons()
 
         sendHeroesHome()
 
