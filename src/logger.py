@@ -59,31 +59,32 @@ def logger(message, progress_indicator = False, color = 'default'):
 
     return True
     
-def loggerRegisterBcoin(bcoin):
+def loggerRegisterBcoin(bcoin, idMeta):
+  if idMeta == 0:
+    return
+    
  
   current_date = dateFormatted()
-  with open('./logs/bcoin.csv', 'a+', encoding='UTF8', newline='') as f:
+  with open('./logs/bcoin_' + idMeta + '.csv', 'a+', encoding='UTF8', newline='') as f:
  
     writer = csv.writer(f)
    
     writer.writerows([[current_date, bcoin]])
     	
-  #logger_file = open("./logs/bcoin.log", "a", encoding='utf-8')
-  #logger_file.write(dateFormatted() + ' '+ bcoin +'\n')
-  #logger_file.close()
-  loggerRegisterBcoinDate()
+  loggerRegisterBcoinDate(idMeta)
   
-def loggerRegisterBcoinDate():
-  logger_file = open("./logs/bcoin_date.log", "w", encoding='utf-8')
+def loggerRegisterBcoinDate(idMeta):
+  logger_file = open("./logs/bcoin_date_" + idMeta + ".log", "w", encoding='utf-8')
   logger_file.write(dateFormatted('%Y-%m-%d'))
   logger_file.close()
-def getLastBcoinDate():
-  exists = os.path.exists("./logs/bcoin_date.log")
+  
+def getLastBcoinDate(idMeta):
+  exists = os.path.exists("./logs/bcoin_date_" + idMeta + ".log")
   
   if exists == False:
     return ''
     
-  logger_file = open("./logs/bcoin_date.log", "r+", encoding='utf-8')
+  logger_file = open("./logs/bcoin_date_" + idMeta + ".log", "r+", encoding='utf-8')
   date_logged =  logger_file.read()
   logger_file.close()
   return date_logged
