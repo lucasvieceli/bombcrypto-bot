@@ -566,8 +566,7 @@ def main():
     t = c['time_intervals']
 
     windows = []
-    checkChest()
-    return 
+ 
     if sys.platform == 'linux' or sys.platform == 'linux2':
         bombcryptoWindows = get_linux_bombcrypto_windows()
     else:
