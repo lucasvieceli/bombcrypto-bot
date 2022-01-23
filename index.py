@@ -523,11 +523,11 @@ def registerBcoin(idMeta):
 
 def checkChest():
     img = printSreen()
-    chest1 = len(positions(images['chest1'],img=img,threshold=0.8))
-    chest2 = len(positions(images['chest2'],img=img,threshold=0.8))
-    chest3 = len(positions(images['chest3'],img=img,threshold=0.8))
-    chest4 = len(positions(images['chest4'],img=img,threshold=0.8))
-    chest5 = len(positions(images['chest5'],img=img,threshold=0.8))
+    chest1 = len(positions(images['chest1'],img=img,threshold=0.9))
+    chest2 = len(positions(images['chest2'],img=img,threshold=0.9))
+    chest3 = len(positions(images['chest3'],img=img,threshold=0.9))
+    chest4 = len(positions(images['chest4'],img=img,threshold=0.9))
+    chest5 = len(positions(images['chest5'],img=img,threshold=0.9))
 
     logger('Báu Comum: %d' % chest1)
     logger('Báu Marrom: %d' % chest2)
@@ -566,7 +566,8 @@ def main():
     t = c['time_intervals']
 
     windows = []
-  
+    checkChest()
+    return 
     if sys.platform == 'linux' or sys.platform == 'linux2':
         bombcryptoWindows = get_linux_bombcrypto_windows()
     else:
