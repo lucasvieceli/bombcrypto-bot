@@ -520,6 +520,27 @@ def registerBcoin(idMeta):
     	
     	logger(digits)
     	clickBtn(images['x'])
+
+def checkChest():
+    img = printSreen()
+    chest1 = len(positions(images['chest1'],img=img,threshold=0.8))
+    chest2 = len(positions(images['chest2'],img=img,threshold=0.8))
+    chest3 = len(positions(images['chest3'],img=img,threshold=0.8))
+    chest4 = len(positions(images['chest4'],img=img,threshold=0.8))
+    chest5 = len(positions(images['chest5'],img=img,threshold=0.8))
+
+    logger('Báu Comum: %d' % chest1)
+    logger('Báu Marrom: %d' % chest2)
+    logger('Báu Roxo: %d' % chest3)
+    logger('Báu Amarelo: %d' % chest4)
+    logger('Báu Azul: %d' % chest4)
+
+    if chest1 == 1 and chest2 == 0 and chest3 == 0 and chest4 == 0 and chest5 == 0:
+        pyautogui.hotkey('ctrl','f5')
+        time.sleep(10)
+        login()
+
+
 def main():
     """Main execution setup and loop"""
     # ==Setup==
@@ -545,7 +566,8 @@ def main():
     t = c['time_intervals']
 
     windows = []
-
+    checkChest()
+    return 
     if sys.platform == 'linux' or sys.platform == 'linux2':
         bombcryptoWindows = get_linux_bombcrypto_windows()
     else:
@@ -559,12 +581,15 @@ def main():
             "heroes": 0,
             "new_map": 0,
             "check_for_captcha": 0,
-            "refresh_heroes": 0,
+            "refresh_heroes": time.time(),
              "register_bcoin": 0,
+             "check_chest": 0,
              "metamask_id": '0'
         })
 
-   
+
+
+ 
 
     if len(windows) >= 1:
         print('>>---> %d windows with the name bombcrypto were found' % len(windows))
@@ -594,6 +619,10 @@ def main():
                     currentWindow["register_bcoin"] = now
                     registerBcoin(currentWindow["metamask_id"])
                
+                if now - currentWindow["check_chest"] > (20 * 60):
+                    currentWindow["check_chest"] = now
+                    checkChest()
+
                 if now - currentWindow["heroes"] > addRandomness(t['send_heroes_for_work'] * 60):
                     currentWindow["heroes"] = now
                     refreshHeroes()
