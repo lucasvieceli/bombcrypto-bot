@@ -523,11 +523,11 @@ def registerBcoin(idMeta):
 
 def checkChest():
     img = printSreen()
-    chest1 = len(positions(images['chest1'],img=img,threshold=0.8))
-    chest2 = len(positions(images['chest2'],img=img,threshold=0.8))
-    chest3 = len(positions(images['chest3'],img=img,threshold=0.8))
-    chest4 = len(positions(images['chest4'],img=img,threshold=0.8))
-    chest5 = len(positions(images['chest5'],img=img,threshold=0.8))
+    chest1 = len(positions(images['chest1'],img=img,threshold=0.95))
+    chest2 = len(positions(images['chest2'],img=img,threshold=0.95))
+    chest3 = len(positions(images['chest3'],img=img,threshold=0.95))
+    chest4 = len(positions(images['chest4'],img=img,threshold=0.95))
+    chest5 = len(positions(images['chest5'],img=img,threshold=0.95))
 
     logger('Báu Comum: %d' % chest1)
     logger('Báu Marrom: %d' % chest2)
