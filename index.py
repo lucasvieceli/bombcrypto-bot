@@ -355,8 +355,13 @@ def login():
         login_attempts = 0
         pyautogui.hotkey('ctrl','f5')
         return
+        
+    if clickBtn(images['accept-checkbox'], timeout = 10):
+        clickBtn(images['accept-button'])
 
     if clickBtn(images['connect-wallet'], timeout = 10):
+        clickBtn(images['login'])
+    
         logger('🎉 Connect wallet button detected, logging in!')
         login_attempts = login_attempts + 1
         #TODO mto ele da erro e poco o botao n abre
@@ -541,6 +546,12 @@ def checkChest():
         login()
 
 
+def activeWindow(currentWindow):
+    if sys.platform == 'linux' or sys.platform == 'linux2':
+        activate_linux_window(currentWindow["window"])
+    else:
+        currentWindow["window"].activate()
+
 def main():
     """Main execution setup and loop"""
     # ==Setup==
@@ -593,40 +604,39 @@ def main():
     if len(windows) >= 1:
         print('>>---> %d windows with the name bombcrypto were found' % len(windows))
 
-    
+        login()
+        return
         while True:
             for currentWindow in windows:
-
-                if sys.platform == 'linux' or sys.platform == 'linux2':
-                    activate_linux_window(currentWindow["window"])
-                else:
-                    currentWindow["window"].activate()
+                activeWindow(currentWindow)
+          
 
 
                 time.sleep(2)
                 now = time.time()
                 
                 if currentWindow["metamask_id"] ==  '0':
+                  
                     currentWindow["metamask_id"] = getIdMetamask()
                     
                 if now - currentWindow["login"] > addRandomness(t['check_for_login'] * 60):
+                  
                     sys.stdout.flush()
                     currentWindow["login"] = now
                     login()
 
                 if now - currentWindow["register_bcoin"] >  60 and currentWindow["metamask_id"] != '0':
+                  
                     currentWindow["register_bcoin"] = now
                     registerBcoin(currentWindow["metamask_id"])
                
-                if now - currentWindow["check_chest"] > (20 * 60):
-                    currentWindow["check_chest"] = now
-                    checkChest()
-
                 if now - currentWindow["heroes"] > addRandomness(t['send_heroes_for_work'] * 60):
+                
                     currentWindow["heroes"] = now
                     refreshHeroes()
 
                 if now - currentWindow["new_map"] > t['check_for_new_map_button']:
+                    
                     currentWindow["new_map"] = now
 
                     if clickBtn(images['new-map']):
@@ -634,6 +644,7 @@ def main():
 
 
                 if now - currentWindow["refresh_heroes"] > addRandomness( t['refresh_heroes_positions'] * 60):
+                   
                     currentWindow["refresh_heroes"] = now
                     refreshHeroesPositions()
 

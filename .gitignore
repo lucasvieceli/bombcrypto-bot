@@ -1,1 +1,4 @@
+
 .history
+logs/*.log
+logs/*.csv
