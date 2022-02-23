@@ -604,8 +604,6 @@ def main():
     if len(windows) >= 1:
         print('>>---> %d windows with the name bombcrypto were found' % len(windows))
 
-        login()
-        return
         while True:
             for currentWindow in windows:
                 activeWindow(currentWindow)
