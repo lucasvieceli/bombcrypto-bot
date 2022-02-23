@@ -7,7 +7,11 @@ Loga na metamask(coloca a senha dela)
 
 
 Abre o bomb por esse link
-https://app.bombcrypto.io
+https://app.bombcrypto.io/webgl/index.html
+https://app.bombcrypto.io/webgl/index.html
+https://app.bombcrypto.io/webgl/index.html
+https://app.bombcrypto.io/webgl/index.html
+https://app.bombcrypto.io/webgl/index.html
 
 
 
